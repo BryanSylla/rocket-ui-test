@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import ConnectedView from './ConnectedView';
-import {fetchLaunchesIfNeeded} from "../actions/Launches";
-import Launch from '../components/Launch';
+import React, { Component } from "react";
+import ConnectedView from "./ConnectedView";
+import { fetchLaunchesIfNeeded } from "../actions/Launches";
+import Launch from "../components/Launch";
 
 class LaunchesView extends Component {
   componentDidMount() {
@@ -20,21 +20,16 @@ class LaunchesView extends Component {
       return <div> NO DATA </div>;
     }
 
-    let launches = [];
-
-    for (let i = 0; i < launchCollection.launches.length; i++) {
-      const launch = launchCollection.launches[i];
-
-      launches.push(
-        <Launch {...{
-          key: launch.launch_id,
-          launch
-        }} />
-
-      )
-    }
-
-    return <ul>{launches}</ul>;
+    launchCollection.launches.map(launch => (
+      <ul>
+        <Launch
+          {...{
+            key: launch.launch_id,
+            launch
+          }}
+        />
+      </ul>
+    ));
   }
 
   render() {
@@ -47,4 +42,4 @@ class LaunchesView extends Component {
   }
 }
 
-export default ConnectedView(LaunchesView, 'launches');
+export default ConnectedView(LaunchesView, "launches");
