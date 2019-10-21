@@ -11,10 +11,7 @@ const API_Services = {
     get: () => api.get(`${serviceUrl}`)
   },
   rocketService: {
-    get: rocket_id =>
-      rocket_id
-        ? api.get(`${rocketServiceUrl}/rocket_id`)
-        : api.get(`${rocketServiceUrl}`)
+    get: rocket_id => rocket_id && api.get(`${rocketServiceUrl}/${rocket_id}`)
   }
 };
 

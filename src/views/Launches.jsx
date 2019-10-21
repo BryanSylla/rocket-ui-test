@@ -20,7 +20,7 @@ class LaunchesView extends Component {
   }
 
   getContent() {
-    const { launchCollection } = this.props;
+    const { launchCollection, dispatch, rocketCollection } = this.props;
 
     if (!launchCollection || launchCollection.fetching) {
       return <div> LOADING </div>;
@@ -38,7 +38,9 @@ class LaunchesView extends Component {
               key: launch.launch_id,
               launch,
               currentExpandedLaunch: this.state.currentExpandedLaunch,
-              setCurrentExpandedLaunch: this.setCurrentExpandedLaunch
+              setCurrentExpandedLaunch: this.setCurrentExpandedLaunch,
+              dispatch,
+              rocketCollection
             }}
           />
         ))}
