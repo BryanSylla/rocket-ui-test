@@ -20,16 +20,18 @@ class LaunchesView extends Component {
       return <div> NO DATA </div>;
     }
 
-    launchCollection.launches.map(launch => (
+    return (
       <ul>
-        <Launch
-          {...{
-            key: launch.launch_id,
-            launch
-          }}
-        />
+        {launchCollection.launches.map(launch => (
+          <Launch
+            {...{
+              key: launch.launch_id,
+              launch
+            }}
+          />
+        ))}
       </ul>
-    ));
+    );
   }
 
   render() {

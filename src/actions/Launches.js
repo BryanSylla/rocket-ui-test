@@ -1,8 +1,8 @@
-import LaunchService from '../services/LaunchService';
+import API_Service from "../services/LaunchService";
 
 export const ACTIONS = {
-  REQUEST_LAUNCHES: 'REQUEST_LAUNCHES',
-  RECEIVE_LAUNCHES: 'RECEIVE_LAUNCHES'
+  REQUEST_LAUNCHES: "REQUEST_LAUNCHES",
+  RECEIVE_LAUNCHES: "RECEIVE_LAUNCHES"
 };
 
 export const requestLaunches = () => ({
@@ -18,10 +18,13 @@ const receiveLaunches = response => ({
 
 export const fetchLaunches = dispatch => {
   dispatch(requestLaunches());
-  return LaunchService.get().then(response => dispatch(receiveLaunches(response)));
+  return API_Service.launchService
+    .get()
+    .then(response => dispatch(receiveLaunches(response)));
 };
 
-const shouldFetchLaunches = launchCollection => !launchCollection || !launchCollection.fetching;
+const shouldFetchLaunches = launchCollection =>
+  !launchCollection || !launchCollection.fetching;
 
 export const fetchLaunchesIfNeeded = ({ dispatch, launchCollection }) =>
   shouldFetchLaunches(launchCollection) && fetchLaunches(dispatch);
