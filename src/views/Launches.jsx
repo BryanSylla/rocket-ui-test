@@ -4,6 +4,16 @@ import { fetchLaunchesIfNeeded } from "../actions/Launches";
 import Launch from "../components/Launch";
 
 class LaunchesView extends Component {
+  constructor() {
+    super();
+    this.state = {
+      currentExpandedLaunch: null
+    };
+  }
+  setCurrentExpandedLaunch = launchMissionName => {
+    this.setState({ currentExpandedLaunch: launchMissionName });
+  };
+
   componentDidMount() {
     const { dispatch, launchesCollection } = this.props;
     fetchLaunchesIfNeeded({ dispatch, launchesCollection });
@@ -26,7 +36,9 @@ class LaunchesView extends Component {
           <Launch
             {...{
               key: launch.launch_id,
-              launch
+              launch,
+              currentExpandedLaunch: this.state.currentExpandedLaunch,
+              setCurrentExpandedLaunch: this.setCurrentExpandedLaunch
             }}
           />
         ))}
